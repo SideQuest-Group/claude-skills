@@ -88,6 +88,32 @@ Override via environment variables (all use `ANCLA_` prefix):
 
 The default Paketo Jammy Full builder supports: Python, Node.js, Go, Java, Ruby, .NET, PHP, Nginx, httpd.
 
+## Bun Support
+
+Paketo and Heroku's Node.js buildpacks don't support Bun. For apps using `bun.lock`, use our CNB buildpack:
+
+- **Repo:** https://github.com/SideQuest-Group/cnb-bun
+- **Quick link:** https://get.ancla.dev/cnb-bun
+
+It detects `bun.lock`/`bun.lockb`, installs Bun, runs `bun install --frozen-lockfile`, and executes build scripts. Designed to run alongside other buildpacks (e.g. before `heroku/python` in a dual-stack app).
+
+Use it via `project.toml` in the app repo:
+
+```toml
+[_]
+schema-version = "0.2"
+
+[[io.buildpacks.group]]
+uri = "https://github.com/SideQuest-Group/cnb-bun"
+
+[[io.buildpacks.group]]
+id = "heroku/python"
+```
+
+Or pass it directly to pack CLI: `--buildpack https://github.com/SideQuest-Group/cnb-bun`
+
+Pin bun version with a `.bun-version` file or `BUN_VERSION` build-time env var.
+
 ## Migrating from Previous Skill Version
 
 If you previously followed this skill's guidance, note these changes:
