@@ -25,10 +25,6 @@ Buildpack builds do **not** require a Procfile. After the image is built and pus
 
 This means any app that a Paketo buildpack can detect will automatically get the right process types without any configuration.
 
-### Optional: Procfile Override
-
-If you need to override the auto-discovered processes, you can still place a `Procfile` or `Procfile.ancla` in the repo. `Procfile.ancla` takes priority over `Procfile` — use the `.ancla` suffix when the repo has a Procfile for other platforms (Heroku, Railway, etc.).
-
 ## Setup Workflow
 
 ### 1. Set Build Strategy
@@ -114,12 +110,7 @@ Or pass it directly to pack CLI: `--buildpack https://github.com/SideQuest-Group
 
 Pin bun version with a `.bun-version` file or `BUN_VERSION` build-time env var.
 
-## Migrating from Previous Skill Version
+## Notes
 
-If you previously followed this skill's guidance, note these changes:
-
-- **Procfile no longer required** — you can remove Procfile creation/validation steps from your workflow. Processes are now auto-discovered from the built image.
-- **Detection simplified** — the detector only checks for Dockerfiles now, not Procfiles. No Dockerfile = buildpack.
-- **`ancla/utils/procfile.py` deleted** — the Procfile parser has been removed. The `procfile` column on the Build model still exists (DB schema) but the parser utility is gone.
-- **kpack is a new option** — if you previously set up pack CLI builds, they still work. kpack is an alternative backend, not a replacement.
+- **No Procfile support** — Ancla does not use Procfiles. Processes are auto-discovered from the built image (CNB metadata or CMD/ENTRYPOINT).
 - **Registry auth key** — the pack CLI path uses bare hostname (e.g. `localhost:5001`) for the docker config auth key, not `scheme://host/v2/`.
