@@ -5,10 +5,10 @@ Shared [Claude Code](https://claude.ai/code) skills for the SideQuest Group.
 ## Install
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/SideQuest-Group/claude-skills/main/install.sh | bash
+curl -fsSL get.ancla.dev/skills | bash
 ```
 
-Or clone it yourself and run the script:
+Or clone it and run the script yourself:
 
 ```sh
 git clone https://github.com/SideQuest-Group/claude-skills.git
